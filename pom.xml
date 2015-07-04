@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>com.comcast.interview.gzoldi.dilithium</groupId>
-  <artifactId>OptimalMining</artifactId>
+  <artifactId>optimal-mining-sim</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>Optimal Mining Application</name>
-  <description>An application to recommend optimal mine configuration to maximize the profits.
-  Disclaimer: This is a simulation and not to be taken seriously for literal use (a test for an interview).</description>
+  <name>Optimal Mining Simulator</name>
+  <description>Recommendation engine to maximize mining profits.
+  Disclaimer: This is a simulation.</description>
   <url>https://github.com/gzoldi-gpfw/deuterium-li6</url>
   
   <developers>
