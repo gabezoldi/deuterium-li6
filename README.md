@@ -1,19 +1,39 @@
-##### Building the code
+## Synopsis
+
+Recommendation engine to simulate maximize mining profits.
+
+## Motivation
+
+* [CSV Test Engineering](https://github.com/CSVTestEngineering/InterviewQuestions)
+
+## Code Example
+
+_&lt;TBD>_
+
+## Installation
+
+Code examples and explanations of how to get the project.
+
+Support: JDK 1.7
+
 ```sh
 mvn clean install
- -or-
-mvn clean install -DskipTests
 ```
 
-##### Running the unit tests
+## Tests
+
 ```sh
 mvn clean test
 ```
 
-##### Java supported
-```sh
-JDK_1.7
-````
+## API Reference
 
-##### Reference
-* [CSV Test Engineering | https://github.com/CSVTestEngineering/InterviewQuestions]
+_&lt;TBD>_
+
+## Contributors
+
+_&lt;TBD>_
+
+## License
+
+_&lt;TBD>_
