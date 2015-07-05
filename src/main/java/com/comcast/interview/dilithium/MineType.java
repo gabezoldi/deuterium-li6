@@ -3,18 +3,18 @@
  *  Copyright (c) 2015 Comcast Corp.  All rights reserved.
  * *********************************************************
  */
-package com.comcast.interview;
+package com.comcast.interview.dilithium;
 
 public enum MineType {
-    DILITHIUM 	("Special",    2.4e8),
-    COAL 		("Hard Rock",  6.0e6),
-    NATURAL_GAS ("Fracturing", 6.3e6),
-    GOLD 		("Panning",    3.3e6),
-    OIL 		("Hydraulic",  7.1e6), 
-    ANALYTICS 	("Data", 	   9.0e7);
+    DILITHIUM 	("Core Extraction", 2.4e8),
+    COAL 		("Hard Rock", 		6.0e6),
+    NATURAL_GAS ("Fracturing", 		6.3e6),
+    GOLD 		("Panning", 		3.3e6),
+    OIL 		("Hydraulic", 		7.1e6), 
+    ANALYTICS 	("Data", 			9.0e7);
 
-    private final String method;  // extraction method
-    private final double capital; // startup capital estimate, in millions, as of 2015
+    private final String method;   // extraction method
+    private final double capital;  // startup capital estimate, in millions, as of 2015
     
     MineType(String method, double capital) {
         this.method = method;

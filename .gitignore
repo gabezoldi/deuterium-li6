@@ -8,3 +8,4 @@ target/
 *.ear
 *.class
 *.zip
+*.log

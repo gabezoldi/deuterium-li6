@@ -42,7 +42,7 @@ mvn eclipse:eclipse  # open .project file
 mvn idea:idea        # open *.ipr file
 ```
 
-...or File > Import (as maven project)...
+...or File > Import (as Existing Maven Projects)...
 
 <br>
 
