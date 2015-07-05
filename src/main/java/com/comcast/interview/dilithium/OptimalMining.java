@@ -23,44 +23,45 @@ public class OptimalMining {
 	private static final Logger logger = LoggerFactory.getLogger(OptimalMining.class);
 	
 	private MineType type;
+	private Integer[] mines;
+	private int totalMines = 0;
+	
 	private ArrayList<String> patterns = new ArrayList<String>();
-    Map<String, Integer> results = new HashMap<String, Integer>();
+    Map<String, Integer> 	  results  = new HashMap<String, Integer>();
 
-	/**
-	 * constructor
-	 * @param type
-	 */
 	public OptimalMining(MineType type) {
 		this.type = type;
 	}
-
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// test data
-		//int[] discoveredMines = { 206, 140, 300, 52, 107 };
-		int[] discoveredMines = { 147, 206, 52, 240, 300 };
-				
-		// generate recommendation
-		OptimalMining optimal = new OptimalMining(MineType.DILITHIUM);
-		optimal.generateRecommendation(discoveredMines);
-		optimal.printMaxProfits();
-	}
 	
 	/**
+	 * Generates recommendation for mine configuration that will
+	 * create the maximum profit.
 	 * 
-	 * @param discovered
+	 * @param discovered the mines detected on the planet
 	 */
-	public void generateRecommendation(int[] discovered) {
-		int totalMines = discovered.length;
+	public void generateRecommendation(Integer[] discovered) {
+		mines = discovered;
+		totalMines = mines.length;
 		
 		// check number of mines are valid > 0
 	    if (totalMines <= 0) 
 	    	logger.error("Invalid number of mines specified: " + totalMines);
 	    
-	    // define number of placeholder based on number of bits specified
+	    // create pattern possibilities
+	    createPatterns();
+	    
+	    // superimpose mine configuration onto patterns
+	    // calc the total profits for each pattern without neighbors
+	    calcProfits();
+	}
+
+	/**
+     * Creates possible patterns without neighboring mines which 
+     * can explode during extraction.
+     * 
+     */
+	public void createPatterns() {	    
+	    // define placeholder based on number of bits specified
 	    String placeholder = "";
 	    for (int i = 0; i < totalMines; i++) 
 	    	placeholder += "0";
@@ -81,19 +82,23 @@ public class OptimalMining {
 	        possible = permutation;
 	    }
 	    
-	    /*
-	     *  create list of possible patterns
-	     */
+	    // create list of possible patterns
 	    for (int value: possible) {
 	    	String bin = Integer.toBinaryString(value);
-	    	// pad zeroes
-	    	String padded = placeholder.substring(bin.length()) + bin;
+	    	String padded = placeholder.substring(bin.length()) + bin;  // pad zeroes
 	    	patterns.add(padded);
 	    }
 	    
-	    // get rid of neighboring mines - cause they can explode, boom!
+	    // get rid of neighboring mines cause they go boom!
 	    removeNeighbors();
-	    
+	}
+	
+	/**
+     * Calculates the profit for each mine configuration 
+     * of possible patterns.
+     * 
+     */
+	public void calcProfits() {
 		for (String pattern : getPatterns()) {
 			logger.debug(pattern);
 			
@@ -107,8 +112,8 @@ public class OptimalMining {
 		            	minePattern += "x";
 		            	break;
 		            case '1': 
-		            	minePattern += discovered[i];
-		            	mineTotal += Integer.valueOf(discovered[i]);
+		            	minePattern += mines[i];
+		            	mineTotal += Integer.valueOf(mines[i]);
 		            	break;
 		            default: 
 		            	throw new RuntimeException("Error: Unexpected bit value in pattern.");
@@ -125,26 +130,33 @@ public class OptimalMining {
 	}
 
 	/**
-	 * 
-	 */
-	public void printMaxProfits() {
+     * Determines the max profit and pattern from list of valid mine 
+     * configurations and prints it out.
+     * 
+     */
+	public HashMap<String, Integer> getMaxProfit() {
+		HashMap<String, Integer> maxProfits = new HashMap<String, Integer>();
+		
 		// print max profits including any mines with duplicate max profits
         int maxTotal = Collections.max(results.values());
         for (Entry<String, Integer> entry : results.entrySet()) 
-            if (entry.getValue() == maxTotal) 
-            	logger.info(entry.getKey() + " = " + maxTotal);
+            if (entry.getValue() == maxTotal)
+            	maxProfits.put(entry.getKey(), maxTotal);
+        return maxProfits;
 	}
 	
 	/**
-	 * 
-	 * @return
-	 */
+     * Returns all valid patterns without neighbors.
+     * 
+     * @return  list of possible patterns
+     */
 	public ArrayList<String> getPatterns() {
 		return patterns;
 	}
 	
 	/**
-	 * 
+	 * Removes all patterns that have neighbors from the list. 
+	 *
 	 */
 	protected void removeNeighbors() {
 		ArrayList<String> removeItems = new ArrayList<String>();
@@ -156,10 +168,11 @@ public class OptimalMining {
 	}
 	
 	/**
-	 * 
-	 * @param input
-	 * @param deleteMe
-	 * @return
+	 * Removes the element from the list. 
+	 *
+	 * @param input    the list
+	 * @param deleteMe the element to remove
+	 * @return         the updated list
 	 */
 	protected ArrayList<String> removeElement(ArrayList<String> input, String deleteMe) {
 		ArrayList<String> cleaned = (ArrayList<String>) input.clone();
@@ -170,9 +183,10 @@ public class OptimalMining {
 	}
 	
 	/**
+	 * Given a pattern checks if there are neighboring mines.
 	 * 
-	 * @param pattern
-	 * @return
+	 * @param pattern the pattern to verify
+	 * @return        true if there is a neighbor to the left or right.
 	 */
 	protected boolean hasNeighbor(String pattern) {
 		char[] token = pattern.toCharArray();

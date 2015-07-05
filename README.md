@@ -2,19 +2,13 @@
 
 Recommendation engine to simulate maximize mining profits.
 
-<br>
-
 ## Motivation
 
 * [CSV Test Engineering](https://github.com/CSVTestEngineering/InterviewQuestions)
 
-<br>
-
 ## Code Example
 
 _&lt;TBD>_
-
-<br>
 
 ## Installation
 
@@ -27,8 +21,6 @@ JDK 1.7
 ```sh
 mvn clean install
 ```
-
-<br>
 
 ## Development
 
@@ -44,30 +36,20 @@ mvn idea:idea        # open *.ipr file
 
 ...or File > Import (as Existing Maven Projects)...
 
-<br>
-
 ## Tests
 
 ```sh
 mvn clean test
 ```
 
-<br>
-
 ## API Reference
 
 _&lt;TBD>_
-
-<br>
 
 ## Contributors
 
 _&lt;TBD>_
 
-<br>
-
 ## License
 
 _&lt;TBD>_
-
-<br>
