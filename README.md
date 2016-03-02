@@ -4,7 +4,7 @@ Recommendation engine to simulate maximize mining profits.
 
 ## Motivation
 
-* [CSV Test Engineering](https://github.com/CSVTestEngineering/InterviewQuestions)
+* [CSV Test Engineering](https://github.com/CSVTestEngineering/InterviewQuestions)  -- (Question solved 6 - Maximum yield)
 
 ## Code Example
 
