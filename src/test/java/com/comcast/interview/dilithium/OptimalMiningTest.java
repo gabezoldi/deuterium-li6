@@ -55,7 +55,6 @@ public class OptimalMiningTest {
 	
 	@Test(groups = { "fast", "positive" }, dataProvider = "getGoodData")
 	public void validMineStrip(Integer[] discoveredMines, String expectedOptimalPattern, int expectedMaxProfit) {
-		
 		// get most profitable mines
 		dilithiumMine.generateRecommendations(discoveredMines);
 		Map<String, Integer> mostProfitable = dilithiumMine.getMaximumProfit();
@@ -68,9 +67,13 @@ public class OptimalMiningTest {
 		Assert.assertTrue( mostProfitable.containsValue(expectedMaxProfit), "Incorrect max profit." );
 	 }
 	
+	@Test
+	public void makeThisFail() {
+		Assert.assertTrue( false, "Making this test fail." );
+	 }
+
 //	@Test(groups = { "fast", "negative" }, dataProvider = "getBadData")
 //	public void invalidMineStrip(Integer[] discoveredMines, String expectedOptimalPattern, int expectedMaxProfit) {
-//		
 //		// get most profitable mines
 //		dilithiumMine.generateRecommendations(discoveredMines);
 //		Map<String, Integer> mostProfitable = dilithiumMine.getMaximumProfit();
